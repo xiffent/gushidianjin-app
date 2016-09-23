@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yijiaersan.webapp.dao.DayStockMapper" >
+  <resultMap id="BaseResultMap" type="com.yijiaersan.webapp.model.DayStock" >
+    <result column="STOCK_ID" property="stockId" jdbcType="BIGINT" />
+    <result column="STOCK_NAME" property="stockName" jdbcType="VARCHAR" />
+    <result column="STOCK_YESTERDAY_POINT" property="stockYesterdayPoint" jdbcType="DECIMAL" />
+    <result column="STOCK_CURRENT_POINT" property="stockCurrentPoint" jdbcType="DECIMAL" />
+    <result column="STOCK_CHANGE" property="stockChange" jdbcType="DECIMAL" />
+    <result column="STOCK_CHANGE_ROTE" property="stockChangeRote" jdbcType="INTEGER" />
+    <result column="STOCK_CURRENT_DATE" property="stockCurrentDate" jdbcType="DATE" />
+  </resultMap>
+  <insert id="insert" parameterType="com.yijiaersan.webapp.model.DayStock" >
+    insert into DAY_STOCK_TABLE (STOCK_ID, STOCK_NAME, STOCK_YESTERDAY_POINT, 
+      STOCK_CURRENT_POINT, STOCK_CHANGE, STOCK_CHANGE_ROTE, 
+      STOCK_CURRENT_DATE)
+    values (#{stockId,jdbcType=BIGINT}, #{stockName,jdbcType=VARCHAR}, #{stockYesterdayPoint,jdbcType=DECIMAL}, 
+      #{stockCurrentPoint,jdbcType=DECIMAL}, #{stockChange,jdbcType=DECIMAL}, #{stockChangeRote,jdbcType=INTEGER}, 
+      #{stockCurrentDate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yijiaersan.webapp.model.DayStock" >
+    insert into DAY_STOCK_TABLE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="stockId != null" >
+        STOCK_ID,
+      </if>
+      <if test="stockName != null" >
+        STOCK_NAME,
+      </if>
+      <if test="stockYesterdayPoint != null" >
+        STOCK_YESTERDAY_POINT,
+      </if>
+      <if test="stockCurrentPoint != null" >
+        STOCK_CURRENT_POINT,
+      </if>
+      <if test="stockChange != null" >
+        STOCK_CHANGE,
+      </if>
+      <if test="stockChangeRote != null" >
+        STOCK_CHANGE_ROTE,
+      </if>
+      <if test="stockCurrentDate != null" >
+        STOCK_CURRENT_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="stockId != null" >
+        #{stockId,jdbcType=BIGINT},
+      </if>
+      <if test="stockName != null" >
+        #{stockName,jdbcType=VARCHAR},
+      </if>
+      <if test="stockYesterdayPoint != null" >
+        #{stockYesterdayPoint,jdbcType=DECIMAL},
+      </if>
+      <if test="stockCurrentPoint != null" >
+        #{stockCurrentPoint,jdbcType=DECIMAL},
+      </if>
+      <if test="stockChange != null" >
+        #{stockChange,jdbcType=DECIMAL},
+      </if>
+      <if test="stockChangeRote != null" >
+        #{stockChangeRote,jdbcType=INTEGER},
+      </if>
+      <if test="stockCurrentDate != null" >
+        #{stockCurrentDate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+</mapper>

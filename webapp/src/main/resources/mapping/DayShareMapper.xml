@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yijiaersan.webapp.dao.DayShareMapper" >
+  <resultMap id="BaseResultMap" type="com.yijiaersan.webapp.model.DayShare" >
+    <result column="DAY_SHARES_ID" property="daySharesId" jdbcType="BIGINT" />
+    <result column="SHARES_CODE" property="sharesCode" jdbcType="VARCHAR" />
+    <result column="SHARES_NAME" property="sharesName" jdbcType="VARCHAR" />
+    <result column="YESTERDAY_CLOSED_PRICE" property="yesterdayClosedPrice" jdbcType="DECIMAL" />
+    <result column="TADAY_OPING_PRICE" property="tadayOpingPrice" jdbcType="DECIMAL" />
+    <result column="TADAY_HIGH_PRICE" property="tadayHighPrice" jdbcType="DECIMAL" />
+    <result column="TADAY_LOW_PRICE" property="tadayLowPrice" jdbcType="DECIMAL" />
+    <result column="TADAY_CLOSED_PRICE" property="tadayClosedPrice" jdbcType="DECIMAL" />
+    <result column="CHANGE_DATA" property="changeData" jdbcType="DECIMAL" />
+    <result column="TADAY_DATE" property="tadayDate" jdbcType="DATE" />
+  </resultMap>
+  <insert id="insert" parameterType="com.yijiaersan.webapp.model.DayShare" >
+    insert into DAY_SHARES_TABLE (DAY_SHARES_ID, SHARES_CODE, SHARES_NAME, 
+      YESTERDAY_CLOSED_PRICE, TADAY_OPING_PRICE, 
+      TADAY_HIGH_PRICE, TADAY_LOW_PRICE, TADAY_CLOSED_PRICE, 
+      CHANGE_DATA, TADAY_DATE)
+    values (#{daySharesId,jdbcType=BIGINT}, #{sharesCode,jdbcType=VARCHAR}, #{sharesName,jdbcType=VARCHAR}, 
+      #{yesterdayClosedPrice,jdbcType=DECIMAL}, #{tadayOpingPrice,jdbcType=DECIMAL}, 
+      #{tadayHighPrice,jdbcType=DECIMAL}, #{tadayLowPrice,jdbcType=DECIMAL}, #{tadayClosedPrice,jdbcType=DECIMAL}, 
+      #{changeData,jdbcType=DECIMAL}, #{tadayDate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yijiaersan.webapp.model.DayShare" >
+    insert into DAY_SHARES_TABLE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="daySharesId != null" >
+        DAY_SHARES_ID,
+      </if>
+      <if test="sharesCode != null" >
+        SHARES_CODE,
+      </if>
+      <if test="sharesName != null" >
+        SHARES_NAME,
+      </if>
+      <if test="yesterdayClosedPrice != null" >
+        YESTERDAY_CLOSED_PRICE,
+      </if>
+      <if test="tadayOpingPrice != null" >
+        TADAY_OPING_PRICE,
+      </if>
+      <if test="tadayHighPrice != null" >
+        TADAY_HIGH_PRICE,
+      </if>
+      <if test="tadayLowPrice != null" >
+        TADAY_LOW_PRICE,
+      </if>
+      <if test="tadayClosedPrice != null" >
+        TADAY_CLOSED_PRICE,
+      </if>
+      <if test="changeData != null" >
+        CHANGE_DATA,
+      </if>
+      <if test="tadayDate != null" >
+        TADAY_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="daySharesId != null" >
+        #{daySharesId,jdbcType=BIGINT},
+      </if>
+      <if test="sharesCode != null" >
+        #{sharesCode,jdbcType=VARCHAR},
+      </if>
+      <if test="sharesName != null" >
+        #{sharesName,jdbcType=VARCHAR},
+      </if>
+      <if test="yesterdayClosedPrice != null" >
+        #{yesterdayClosedPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="tadayOpingPrice != null" >
+        #{tadayOpingPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="tadayHighPrice != null" >
+        #{tadayHighPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="tadayLowPrice != null" >
+        #{tadayLowPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="tadayClosedPrice != null" >
+        #{tadayClosedPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="changeData != null" >
+        #{changeData,jdbcType=DECIMAL},
+      </if>
+      <if test="tadayDate != null" >
+        #{tadayDate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+</mapper>

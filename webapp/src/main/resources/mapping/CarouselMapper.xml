@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yijiaersan.webapp.dao.CarouselMapper" >
+  <resultMap id="BaseResultMap" type="com.yijiaersan.webapp.model.Carousel" >
+    <result column="carousel_id" property="carouselId" jdbcType="BIGINT" />
+    <result column="carousel_url" property="carouselUrl" jdbcType="VARCHAR" />
+    <result column="carousel_order" property="carouselOrder" jdbcType="INTEGER" />
+    <result column="ARTICLE_ID" property="articleId" jdbcType="BIGINT"/>
+  </resultMap>
+  <insert id="insert" parameterType="com.yijiaersan.webapp.model.Carousel" >
+    insert into carousel_table (carousel_id, carousel_url, carousel_order,ARTICLE_ID
+      )
+    values (#{carouselId,jdbcType=BIGINT}, #{carouselUrl,jdbcType=VARCHAR}, #{carouselOrder,jdbcType=INTEGER}
+      ,#{articleId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yijiaersan.webapp.model.Carousel" >
+    insert into carousel_table
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="carouselId != null" >
+        carousel_id,
+      </if>
+      <if test="carouselUrl != null" >
+        carousel_url,
+      </if>
+      <if test="carouselOrder != null" >
+        carousel_order,
+      </if>
+       <if test="articleId != null" >
+        ARTICLE_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="carouselId != null" >
+        #{carouselId,jdbcType=BIGINT},
+      </if>
+      <if test="carouselUrl != null" >
+        #{carouselUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="carouselOrder != null" >
+        #{carouselOrder,jdbcType=INTEGER},
+      </if>
+      <if test="articleId != null" >
+        #{articleId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  
+  <select id="selectCarouselList" resultMap="BaseResultMap">
+  	select * from carousel_table
+  </select>
+</mapper>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yijiaersan.webapp.dao.UserInfoMapper">
+	<resultMap id="BaseResultMap" type="com.yijiaersan.webapp.model.UserInfo">
+		<result column="USER_ID" jdbcType="BIGINT" property="userId" />
+		<result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+		<result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+		<result column="USER_TEL" jdbcType="VARCHAR" property="userTel" />
+		<result column="USER_EMAIL" jdbcType="VARCHAR" property="userEmail" />
+		<result column="HEAD_PIC" jdbcType="VARCHAR" property="headPic" />
+		<result column="USER_TYPE" jdbcType="VARCHAR" property="userType" />
+		<result column="CREAT_DATE" jdbcType="DATE" property="creatDate" />
+		<result column="ISVIP" jdbcType="VARCHAR" property="isVip" />
+		<result column="USE_EQUIPMENT" jdbcType="VARCHAR" property="useEquipment" />
+	</resultMap>
+	<insert id="insert" parameterType="com.yijiaersan.webapp.model.UserInfo">
+		insert into USER_INFO (USER_ID, USER_NAME, PASSWORD,
+		USER_TEL, USER_EMAIL, HEAD_PIC,
+		USER_TYPE, CREAT_DATE, 
+		USE_EQUIPMENT)
+		values (#{userId,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR},
+		#{password,jdbcType=VARCHAR},
+		#{userTel,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, #{headPic,jdbcType=VARCHAR},
+		#{userType,jdbcType=VARCHAR}, #{creatDate,jdbcType=DATE},
+		#{useEquipment,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.yijiaersan.webapp.model.UserInfo">
+		insert into USER_INFO
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="userId != null">
+				USER_ID,
+			</if>
+			<if test="userName != null">
+				USER_NAME,
+			</if>
+			<if test="password != null">
+				PASSWORD,
+			</if>
+			<if test="userTel != null">
+				USER_TEL,
+			</if>
+			<if test="userEmail != null">
+				USER_EMAIL,
+			</if>
+			<if test="headPic != null">
+				HEAD_PIC,
+			</if>
+			<if test="userType != null">
+				USER_TYPE,
+			</if>
+			<if test="creatDate != null">
+				CREAT_DATE,
+			</if>
+			<if test="useEquipment != null">
+				USE_EQUIPMENT,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="userId != null">
+				#{userId,jdbcType=BIGINT},
+			</if>
+			<if test="userName != null">
+				#{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				#{password,jdbcType=VARCHAR},
+			</if>
+			<if test="userTel != null">
+				#{userTel,jdbcType=VARCHAR},
+			</if>
+			<if test="userEmail != null">
+				#{userEmail,jdbcType=VARCHAR},
+			</if>
+			<if test="headPic != null">
+				#{headPic,jdbcType=VARCHAR},
+			</if>
+			<if test="userType != null">
+				#{userType,jdbcType=VARCHAR},
+			</if>
+			<if test="creatDate != null">
+				#{creatDate,jdbcType=DATE},
+			</if>
+			<if test="useEquipment != null">
+				#{useEquipment,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<select id="findUser" resultMap="BaseResultMap"
+		parameterType="com.yijiaersan.webapp.model.UserInfo">
+		select * from USER_INFO where USER_TEL = #{userTel,jdbcType=VARCHAR}
+	</select>
+	
+	<update id="updateUser" parameterType="com.yijiaersan.webapp.model.UserInfo">
+		update USER_INFO set USER_TYPE = #{userType,jdbcType=VARCHAR} where USER_ID = #{userId,jdbcType=BIGINT}
+	</update>
+	
+	<update id="updatePassword" parameterType="com.yijiaersan.webapp.model.UserInfo">
+		update USER_INFO set PASSWORD = #{password,jdbcType=VARCHAR} where USER_TEL = #{userTel,jdbcType=VARCHAR}
+	</update>
+	
+	
+	<update id="updateUserInfo" parameterType="com.yijiaersan.webapp.model.UserInfo">
+	
+	UPDATE USER_INFO
+    <set>
+        <if test="userName!=null and userName!='' ">
+            USER_NAME = #{userName},
+        </if>
+         <if test="password!=null and password!='' ">
+            PASSWORD = #{password},
+        </if>
+        <if test="userTel!=null and userTel!='' ">
+            USER_TEL = #{userTel},
+        </if>
+        <if test="userEmail!=null and userEmail!='' ">
+            USER_EMAIL = #{userEmail},
+        </if>
+        
+        <if test="headPic!=null and headPic!='' ">
+            HEAD_PIC = #{headPic},
+        </if>
+        <if test="userType!=null and userType!='' ">
+            USER_TYPE = #{userType},
+        </if>
+        <if test="creatDate!=null and creatDate!='' ">
+            CREAT_DATE = #{creatDate},
+        </if>
+        <if test="useEquipment!=null and useEquipment!='' ">
+            USE_EQUIPMENT = #{useEquipment}
+        </if>
+    </set>
+    WHERE USER_TEL = #{userTel,jdbcType=VARCHAR}
+	
+	</update>
+</mapper>

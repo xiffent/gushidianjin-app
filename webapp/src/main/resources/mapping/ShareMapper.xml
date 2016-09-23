@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yijiaersan.webapp.dao.ShareMapper" >
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"></cache>
+  <resultMap id="BaseResultMap" type="com.yijiaersan.webapp.model.Share" >
+    <result column="SHARES_ID" property="sharesId" jdbcType="BIGINT" />
+    <result column="STOCK_ID" property="stockId" jdbcType="BIGINT" />
+    <result column="SHARES_CODE" property="sharesCode" jdbcType="VARCHAR" />
+    <result column="SHARES_NAME" property="sharesName" jdbcType="VARCHAR" />
+    <result column="SHARES_PY" property="sharesPy" jdbcType="VARCHAR"/>
+    <result column="VERSION" property="version" />
+  </resultMap>
+  <insert id="insert" parameterType="com.yijiaersan.webapp.model.Share" >
+    insert into SHARES_TABLE (SHARES_ID, STOCK_ID, SHARES_CODE, 
+      SHARES_NAME,SHARES_PY,VERSION)
+    values (#{sharesId,jdbcType=BIGINT}, #{stockId,jdbcType=BIGINT}, #{sharesCode,jdbcType=VARCHAR}, 
+      #{sharesName,jdbcType=VARCHAR},#{sharesPy,jdbcType=VARCHAR},#{version})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yijiaersan.webapp.model.Share" >
+    insert into SHARES_TABLE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sharesId != null" >
+        SHARES_ID,
+      </if>
+      <if test="stockId != null" >
+        STOCK_ID,
+      </if>
+      <if test="sharesCode != null" >
+        SHARES_CODE,
+      </if>
+      <if test="sharesName != null" >
+        SHARES_NAME,
+      </if>
+       <if test="sharesPy != null" >
+        SHARES_PY,
+      </if>
+      <if test="version != null" >
+        VERSION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sharesId != null" >
+        #{sharesId,jdbcType=BIGINT},
+      </if>
+      <if test="stockId != null" >
+        #{stockId,jdbcType=BIGINT},
+      </if>
+      <if test="sharesCode != null" >
+        #{sharesCode,jdbcType=VARCHAR},
+      </if>
+      <if test="sharesName != null" >
+        #{sharesName,jdbcType=VARCHAR},
+      </if>
+      <if test="sharesPy != null" >
+        #{sharesPy,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version},
+      </if>
+    </trim>
+  </insert>
+  
+  <select id="selectShareList" resultMap="BaseResultMap">
+  	select * from SHARES_TABLE
+  </select>
+  
+  <select id="selectVersion" resultType="Integer">
+  
+  	select MAX(VERSION) from SHARES_TABLE
+  
+  </select>
+  
+  <update id="updateVersion">
+  	update SHARES_TABLE set VERSION=VERSION+1
+  </update>
+</mapper>

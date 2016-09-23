@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yijiaersan.webapp.dao.PayInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.yijiaersan.webapp.model.PayInfo" >
+    <result column="PAY_ID" property="payId" jdbcType="BIGINT" />
+    <result column="USER_ID" property="userId" jdbcType="BIGINT" />
+    <result column="PAY_QUOTA" property="payQuota" jdbcType="INTEGER" />
+    <result column="PAY_TYPE" property="payType" jdbcType="VARCHAR" />
+    <result column="PAY_DATE" property="payDate" jdbcType="DATE" />
+    <result column="PAY_STATE" property="payState" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.yijiaersan.webapp.model.PayInfo" >
+    insert into PAY_INFO_TABLE (PAY_ID, USER_ID, PAY_QUOTA, 
+      PAY_TYPE, PAY_DATE, PAY_STATE
+      )
+    values (#{payId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{payQuota,jdbcType=INTEGER}, 
+      #{payType,jdbcType=VARCHAR}, #{payDate,jdbcType=DATE}, #{payState,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yijiaersan.webapp.model.PayInfo" >
+    insert into PAY_INFO_TABLE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="payId != null" >
+        PAY_ID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="payQuota != null" >
+        PAY_QUOTA,
+      </if>
+      <if test="payType != null" >
+        PAY_TYPE,
+      </if>
+      <if test="payDate != null" >
+        PAY_DATE,
+      </if>
+      <if test="payState != null" >
+        PAY_STATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="payId != null" >
+        #{payId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="payQuota != null" >
+        #{payQuota,jdbcType=INTEGER},
+      </if>
+      <if test="payType != null" >
+        #{payType,jdbcType=VARCHAR},
+      </if>
+      <if test="payDate != null" >
+        #{payDate,jdbcType=DATE},
+      </if>
+      <if test="payState != null" >
+        #{payState,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yijiaersan.webapp.dao.UserCollectionMapper" >
+  <resultMap id="BaseResultMap" type="com.yijiaersan.webapp.model.UserCollection" >
+    <result column="COLLECTION_ID" property="collectionId" jdbcType="BIGINT" />
+    <result column="USER_ID" property="userId" jdbcType="BIGINT" />
+    <result column="ARTICLE_ID" property="articleId" jdbcType="BIGINT" />
+    <result column="COLLECTION_TIME" property="collectionTime" jdbcType="DATE" />
+  </resultMap>
+  <insert id="insert" parameterType="com.yijiaersan.webapp.model.UserCollection" >
+    insert into user_collection (COLLECTION_ID, USER_ID, ARTICLE_ID, 
+      COLLECTION_TIME)
+    values (#{collectionId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{articleId,jdbcType=BIGINT}, 
+      #{collectionTime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yijiaersan.webapp.model.UserCollection" >
+    insert into user_collection
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="collectionId != null" >
+        COLLECTION_ID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="articleId != null" >
+        ARTICLE_ID,
+      </if>
+      <if test="collectionTime != null" >
+        COLLECTION_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="collectionId != null" >
+        #{collectionId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="articleId != null" >
+        #{articleId,jdbcType=BIGINT},
+      </if>
+      <if test="collectionTime != null" >
+        #{collectionTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  
+  <select id="selectUserCollectionList" parameterType="com.yijiaersan.webapp.model.UserCollection" resultMap="BaseResultMap">
+  	select COLLECTION_ID, USER_ID, ARTICLE_ID, 
+      COLLECTION_TIME 
+      from 
+      user_collection
+      where USER_ID = #{userId,jdbcType=BIGINT} order by COLLECTION_TIME ASC;
+  </select>
+  
+  <delete id="deleteUserCollection" parameterType="com.yijiaersan.webapp.model.UserCollection">
+  	delete from user_collection 
+  	where 
+  	ARTICLE_ID =  #{articleId,jdbcType=BIGINT} 
+  	and 
+  	USER_ID = #{userId,jdbcType=BIGINT}
+  </delete>
+  
+  
+  <select id="selectUserCollection" resultMap="BaseResultMap" parameterType="com.yijiaersan.webapp.model.UserCollection">
+  	select COLLECTION_ID, USER_ID, ARTICLE_ID, 
+      COLLECTION_TIME 
+      from 
+      user_collection
+      where USER_ID = #{userId,jdbcType=BIGINT} and  ARTICLE_ID =  #{articleId,jdbcType=BIGINT}
+  </select>
+</mapper>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yijiaersan.webapp.dao.DayReferenceMapper" >
+  <resultMap id="BaseResultMap" type="com.yijiaersan.webapp.model.DayReference" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="ARTICLE_ID" property="articleId" jdbcType="BIGINT" />
+    <result column="store_num" property="storeNum" jdbcType="VARCHAR" />
+    <result column="short_date" property="shortDate" jdbcType="VARCHAR" />
+    <result column="long_date" property="longDate" jdbcType="VARCHAR" />
+    <result column="hot_point" property="hotPoint" jdbcType="VARCHAR" />
+    <result column="oper_strategy" property="operStrategy" jdbcType="VARCHAR" />
+    <result column="danger_cue" property="dangerCue" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, ARTICLE_ID, store_num, short_date, long_date, hot_point, oper_strategy, danger_cue
+  </sql>
+  <select id="selectDayReference" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from day_reference_table
+    where ARTICLE_ID = #{articleId}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from day_reference_table
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.yijiaersan.webapp.model.DayReference" >
+    insert into day_reference_table (ID, ARTICLE_ID, store_num, 
+      short_date, long_date, hot_point, 
+      oper_strategy, danger_cue)
+    values (#{id,jdbcType=BIGINT}, #{articleId,jdbcType=BIGINT}, #{storeNum,jdbcType=VARCHAR}, 
+      #{shortDate,jdbcType=VARCHAR}, #{longDate,jdbcType=VARCHAR}, #{hotPoint,jdbcType=VARCHAR}, 
+      #{operStrategy,jdbcType=VARCHAR}, #{dangerCue,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yijiaersan.webapp.model.DayReference" >
+    insert into day_reference_table
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="articleId != null" >
+        ARTICLE_ID,
+      </if>
+      <if test="storeNum != null" >
+        store_num,
+      </if>
+      <if test="shortDate != null" >
+        short_date,
+      </if>
+      <if test="longDate != null" >
+        long_date,
+      </if>
+      <if test="hotPoint != null" >
+        hot_point,
+      </if>
+      <if test="operStrategy != null" >
+        oper_strategy,
+      </if>
+      <if test="dangerCue != null" >
+        danger_cue,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="articleId != null" >
+        #{articleId,jdbcType=BIGINT},
+      </if>
+      <if test="storeNum != null" >
+        #{storeNum,jdbcType=VARCHAR},
+      </if>
+      <if test="shortDate != null" >
+        #{shortDate,jdbcType=VARCHAR},
+      </if>
+      <if test="longDate != null" >
+        #{longDate,jdbcType=VARCHAR},
+      </if>
+      <if test="hotPoint != null" >
+        #{hotPoint,jdbcType=VARCHAR},
+      </if>
+      <if test="operStrategy != null" >
+        #{operStrategy,jdbcType=VARCHAR},
+      </if>
+      <if test="dangerCue != null" >
+        #{dangerCue,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yijiaersan.webapp.model.DayReference" >
+    update day_reference_table
+    <set >
+      <if test="articleId != null" >
+        ARTICLE_ID = #{articleId,jdbcType=BIGINT},
+      </if>
+      <if test="storeNum != null" >
+        store_num = #{storeNum,jdbcType=VARCHAR},
+      </if>
+      <if test="shortDate != null" >
+        short_date = #{shortDate,jdbcType=VARCHAR},
+      </if>
+      <if test="longDate != null" >
+        long_date = #{longDate,jdbcType=VARCHAR},
+      </if>
+      <if test="hotPoint != null" >
+        hot_point = #{hotPoint,jdbcType=VARCHAR},
+      </if>
+      <if test="operStrategy != null" >
+        oper_strategy = #{operStrategy,jdbcType=VARCHAR},
+      </if>
+      <if test="dangerCue != null" >
+        danger_cue = #{dangerCue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yijiaersan.webapp.model.DayReference" >
+    update day_reference_table
+    set ARTICLE_ID = #{articleId,jdbcType=BIGINT},
+      store_num = #{storeNum,jdbcType=VARCHAR},
+      short_date = #{shortDate,jdbcType=VARCHAR},
+      long_date = #{longDate,jdbcType=VARCHAR},
+      hot_point = #{hotPoint,jdbcType=VARCHAR},
+      oper_strategy = #{operStrategy,jdbcType=VARCHAR},
+      danger_cue = #{dangerCue,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yijiaersan.webapp.dao.TradeMapper" >
+  <resultMap id="BaseResultMap" type="com.yijiaersan.webapp.model.Trade" >
+    <result column="TRADE_ID" property="tradeId" jdbcType="BIGINT" />
+    <result column="TRADE_CODE" property="tradeCode" jdbcType="VARCHAR" />
+    <result column="TRADE_NAME" property="tradeName" jdbcType="VARCHAR" />
+    <result column="TRADE_CHANGE_ROTE" property="tradeChangeRote" jdbcType="DECIMAL" />
+    <result column="TRADE_DATE" property="tradeDate" jdbcType="DATE" />
+  </resultMap>
+  <insert id="insert" parameterType="com.yijiaersan.webapp.model.Trade" >
+    insert into TRADE_TABLE (TRADE_ID, TRADE_CODE, TRADE_NAME, 
+      TRADE_CHANGE_ROTE, TRADE_DATE)
+    values (#{tradeId,jdbcType=BIGINT}, #{tradeCode,jdbcType=VARCHAR}, #{tradeName,jdbcType=VARCHAR}, 
+      #{tradeChangeRote,jdbcType=DECIMAL}, #{tradeDate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yijiaersan.webapp.model.Trade" >
+    insert into TRADE_TABLE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tradeId != null" >
+        TRADE_ID,
+      </if>
+      <if test="tradeCode != null" >
+        TRADE_CODE,
+      </if>
+      <if test="tradeName != null" >
+        TRADE_NAME,
+      </if>
+      <if test="tradeChangeRote != null" >
+        TRADE_CHANGE_ROTE,
+      </if>
+      <if test="tradeDate != null" >
+        TRADE_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tradeId != null" >
+        #{tradeId,jdbcType=BIGINT},
+      </if>
+      <if test="tradeCode != null" >
+        #{tradeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeName != null" >
+        #{tradeName,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeChangeRote != null" >
+        #{tradeChangeRote,jdbcType=DECIMAL},
+      </if>
+      <if test="tradeDate != null" >
+        #{tradeDate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yijiaersan.webapp.dao.ArticleMapper" >
+  <resultMap id="BaseResultMap" type="com.yijiaersan.webapp.model.Article" >
+    <result column="ARTICLE_ID" property="articleId" jdbcType="BIGINT" />
+    <result column="USER_ID" property="userId" jdbcType="BIGINT" />
+    <result column="ARTICLE_TITLE" property="articleTitle" jdbcType="VARCHAR" />
+    <result column="ARTICLE_AUTHOR" property="articleAuthor" jdbcType="VARCHAR" />
+    <result column="ARTICLE_COVER_URL" property="articleCoverUrl" jdbcType="VARCHAR" />
+    <result column="IS_VIP_ARTICLE" property="isVipArticle" jdbcType="VARCHAR" />
+    <result column="CREAT_DATE" property="creatDate" jdbcType="VARCHAR"/>
+    <result column="ARTICLE_TYPE_ID" property="articleTypeId" jdbcType="BIGINT" />
+    <result column="IS_DRAFT" property="isDraft" jdbcType="VARCHAR" />
+    <result column="KIND" property="kind" jdbcType="VARCHAR" />
+    <result column="KIND_DATE" property="kindDate"/>
+    <result column="AUDITING_FLAG" property="auditingFlag" jdbcType="VARCHAR" />
+    <result column="ARTICLE_CONTENT" property="articleContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.yijiaersan.webapp.model.Article" extends="BaseResultMap" >
+    <result column="ARTICLE_CONTENT" property="articleContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Blob_Column_List" >
+    ARTICLE_CONTENT
+  </sql>
+  <insert id="insert" parameterType="com.yijiaersan.webapp.model.Article" >
+    insert into ARTICLE_TABLE (ARTICLE_ID, USER_ID, 
+      ARTICLE_TITLE, ARTICLE_AUTHOR, ARTICLE_COVER_URL, 
+      IS_VIP_ARTICLE, CREAT_DATE, ARTICLE_TYPE_ID, 
+      IS_DRAFT, KIND, KIND_DATE, 
+      AUDITING_FLAG, ARTICLE_CONTENT)
+    values (#{articleId,jdbcType=BIGINT},  #{userId,jdbcType=BIGINT}, 
+      #{articleTitle,jdbcType=VARCHAR}, #{articleAuthor,jdbcType=VARCHAR}, #{articleCoverUrl,jdbcType=VARCHAR}, 
+      #{isVipArticle,jdbcType=VARCHAR}, #{creatDate,jdbcType=VARCHAR}, #{articleTypeId,jdbcType=BIGINT}, 
+      #{isDraft,jdbcType=VARCHAR}, #{kind,jdbcType=VARCHAR}, #{kindDate}, 
+      #{auditingFlag,jdbcType=VARCHAR}, #{articleContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yijiaersan.webapp.model.Article" >
+    insert into ARTICLE_TABLE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="articleId != null" >
+        ARTICLE_ID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="articleTitle != null" >
+        ARTICLE_TITLE,
+      </if>
+      <if test="articleAuthor != null" >
+        ARTICLE_AUTHOR,
+      </if>
+      <if test="articleCoverUrl != null" >
+        ARTICLE_COVER_URL,
+      </if>
+      <if test="isVipArticle != null" >
+        IS_VIP_ARTICLE,
+      </if>
+      <if test="creatDate != null" >
+        CREAT_DATE,
+      </if>
+      <if test="articleTypeId != null" >
+        ARTICLE_TYPE_ID,
+      </if>
+      <if test="isDraft != null" >
+        IS_DRAFT,
+      </if>
+      <if test="kind != null" >
+        KIND,
+      </if>
+      <if test="kindDate != null" >
+        KIND_DATE,
+      </if>
+      <if test="auditingFlag != null" >
+        AUDITING_FLAG,
+      </if>
+      <if test="articleContent != null" >
+        ARTICLE_CONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="articleId != null" >
+        #{articleId,jdbcType=BIGINT},
+      </if>
+     
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="articleTitle != null" >
+        #{articleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="articleAuthor != null" >
+        #{articleAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="articleCoverUrl != null" >
+        #{articleCoverUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="isVipArticle != null" >
+        #{isVipArticle,jdbcType=VARCHAR},
+      </if>
+      <if test="creatDate != null" >
+        #{creatDate,jdbcType=VARCHAR},
+      </if>
+      <if test="articleTypeId != null" >
+        #{articleTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="isDraft != null" >
+        #{isDraft,jdbcType=VARCHAR},
+      </if>
+      <if test="kind != null" >
+        #{kind,jdbcType=VARCHAR},
+      </if>
+      <if test="kindDate != null" >
+        #{kindDate,jdbcType=DATE},
+      </if>
+      <if test="auditingFlag != null" >
+        #{auditingFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="articleContent != null" >
+        #{articleContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <select id="selectArticle" resultMap="ResultMapWithBLOBs">
+  	select * from ARTICLE_TABLE where ARTICLE_ID = #{articleId}
+  </select>
+  
+  <select id="selectAllArticle" resultMap="ResultMapWithBLOBs">
+  	select ARTICLE_ID ,ARTICLE_TITLE ,KIND,ARTICLE_TYPE_ID, IS_VIP_ARTICLE from ARTICLE_TABLE where KIND = 1 and AUDITING_FLAG =1 order by CREAT_DATE DESC
+  </select>
+  
+  <select id="selectKindArticle" resultMap="ResultMapWithBLOBs">
+  	select ARTICLE_ID ,ARTICLE_TITLE ,KIND,ARTICLE_TYPE_ID, IS_VIP_ARTICLE from ARTICLE_TABLE where KIND = 0 and AUDITING_FLAG =1 order by KIND_DATE DESC
+  </select>
+  
+  
+  <select id="selectArticleList" resultMap="ResultMapWithBLOBs" parameterType="com.yijiaersan.webapp.model.QueryArticleReqParams">
+  	select 
+  	ARTICLE_ID, USER_ID, 
+      ARTICLE_TITLE, ARTICLE_AUTHOR, ARTICLE_COVER_URL, 
+      IS_VIP_ARTICLE, CREAT_DATE, ARTICLE_TYPE_ID, 
+      IS_DRAFT, KIND, KIND_DATE, 
+      AUDITING_FLAG, ARTICLE_CONTENT
+      from 
+      ARTICLE_TABLE
+      
+      <trim prefix="where" prefixOverrides="and |or">  
+        <if test="createDateTime != null">  
+           and CREAT_DATE = #{createDateTime}  
+        </if>  
+        <if test="isVip != null">  
+            and IS_VIP_ARTICLE = #{isVip}  
+        </if>  
+        order by ARTICLE_ID limit #{startRow},#{pageSize}
+    </trim>  
+  </select>
+</mapper>

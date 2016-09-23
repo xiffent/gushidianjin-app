@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yijiaersan.webapp.dao.TokenInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.yijiaersan.webapp.model.TokenInfo" >
+    <result column="MAIN_ID" property="mainId" jdbcType="BIGINT" />
+    <result column="TOKEN" property="token" jdbcType="VARCHAR" />
+    <result column="USER_INFO" property="userInfo" jdbcType="LONGVARCHAR" />
+    <result column="PHONE_NUM" property="phoneNum" jdbcType="VARCHAR"/>
+  </resultMap>
+  <!-- <resultMap id="ResultMapWithBLOBs" type="com.yijiaersan.webapp.model.TokenInfo" extends="BaseResultMap" >
+    
+  </resultMap> -->
+  <sql id="Blob_Column_List" >
+    USER_INFO
+  </sql>
+  <insert id="insert" parameterType="com.yijiaersan.webapp.model.TokenInfo" >
+    insert into token_info (MAIN_ID, TOKEN, USER_INFO,PHONE_NUM
+      )
+    values (#{mainId,jdbcType=BIGINT}, #{token,jdbcType=VARCHAR}, #{userInfo,jdbcType=LONGVARCHAR}, #{phoneNum,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yijiaersan.webapp.model.TokenInfo" >
+    insert into token_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mainId != null" >
+        MAIN_ID,
+      </if>
+      <if test="token != null" >
+        TOKEN,
+      </if>
+      <if test="userInfo != null" >
+        USER_INFO,
+      </if>
+      <if test="phoneNum != null" >
+        PHONE_NUM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mainId != null" >
+        #{mainId,jdbcType=BIGINT},
+      </if>
+      <if test="token != null" >
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="userInfo != null" >
+        #{userInfo,jdbcType=LONGVARCHAR},
+      </if>
+       <if test="phoneNum != null" >
+        #{phoneNum,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <select id="selectTokenInfo" parameterType="String" resultMap="BaseResultMap">
+  	select * from token_info where TOKEN = #{token,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteTokenInfo" parameterType="String">
+  	delete from token_info where TOKEN = #{token,jdbcType=VARCHAR}
+  </delete>
+  <select id="selectTokenInfoByPhoneNum" parameterType="String" resultMap="BaseResultMap">
+  	select * from token_info where PHONE_NUM = #{phoneNum,jdbcType=VARCHAR}
+  </select>
+  
+  
+</mapper>

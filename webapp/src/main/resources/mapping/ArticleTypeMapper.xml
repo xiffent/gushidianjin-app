@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yijiaersan.webapp.dao.ArticleTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.yijiaersan.webapp.model.ArticleType" >
+    <result column="ARTICLE_TYPE_ID" property="articleTypeId" jdbcType="BIGINT" />
+    <result column="ARTICLE_TYPE_NAME" property="articleTypeName" jdbcType="VARCHAR" />
+    <result column="ARTICLE_TYPE_ICON" property="articleTypeIcon" jdbcType="VARCHAR" />
+    <result column="ARTICLE_TYPE_REMARKS" property="articleTypeRemarks" jdbcType="VARCHAR" />
+    <result column="CREAT_DATE" property="creatDate" jdbcType="DATE" />
+  </resultMap>
+  <insert id="insert" parameterType="com.yijiaersan.webapp.model.ArticleType" >
+    insert into ARTICLE_TYPE_TABLE (ARTICLE_TYPE_ID, ARTICLE_TYPE_NAME, ARTICLE_TYPE_ICON, 
+      ARTICLE_TYPE_REMARKS, CREAT_DATE)
+    values (#{articleTypeId,jdbcType=BIGINT}, #{articleTypeName,jdbcType=VARCHAR}, #{articleTypeIcon,jdbcType=VARCHAR}, 
+      #{articleTypeRemarks,jdbcType=VARCHAR}, #{creatDate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yijiaersan.webapp.model.ArticleType" >
+    insert into ARTICLE_TYPE_TABLE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="articleTypeId != null" >
+        ARTICLE_TYPE_ID,
+      </if>
+      <if test="articleTypeName != null" >
+        ARTICLE_TYPE_NAME,
+      </if>
+      <if test="articleTypeIcon != null" >
+        ARTICLE_TYPE_ICON,
+      </if>
+      <if test="articleTypeRemarks != null" >
+        ARTICLE_TYPE_REMARKS,
+      </if>
+      <if test="creatDate != null" >
+        CREAT_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="articleTypeId != null" >
+        #{articleTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="articleTypeName != null" >
+        #{articleTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="articleTypeIcon != null" >
+        #{articleTypeIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="articleTypeRemarks != null" >
+        #{articleTypeRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="creatDate != null" >
+        #{creatDate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  
+  <select id="selectArticleType" resultMap="BaseResultMap">
+  	select * from ARTICLE_TYPE_TABLE where ARTICLE_TYPE_ID = #{articleTypeId}
+  </select>
+</mapper>

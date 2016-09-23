@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yijiaersan.webapp.dao.ConceptMapper" >
+  <resultMap id="BaseResultMap" type="com.yijiaersan.webapp.model.Concept" >
+    <result column="CONCEPT_ID" property="conceptId" jdbcType="BIGINT" />
+    <result column="CONCEPT_CODE" property="conceptCode" jdbcType="VARCHAR" />
+    <result column="CONCEPT_NAME" property="conceptName" jdbcType="VARCHAR" />
+    <result column="CONCEPT_CHANGE_ROTE" property="conceptChangeRote" jdbcType="DECIMAL" />
+  </resultMap>
+  <insert id="insert" parameterType="com.yijiaersan.webapp.model.Concept" >
+    insert into CONCEPT_TABLE (CONCEPT_ID, CONCEPT_CODE, CONCEPT_NAME, 
+      CONCEPT_CHANGE_ROTE)
+    values (#{conceptId,jdbcType=BIGINT}, #{conceptCode,jdbcType=VARCHAR}, #{conceptName,jdbcType=VARCHAR}, 
+      #{conceptChangeRote,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yijiaersan.webapp.model.Concept" >
+    insert into CONCEPT_TABLE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="conceptId != null" >
+        CONCEPT_ID,
+      </if>
+      <if test="conceptCode != null" >
+        CONCEPT_CODE,
+      </if>
+      <if test="conceptName != null" >
+        CONCEPT_NAME,
+      </if>
+      <if test="conceptChangeRote != null" >
+        CONCEPT_CHANGE_ROTE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="conceptId != null" >
+        #{conceptId,jdbcType=BIGINT},
+      </if>
+      <if test="conceptCode != null" >
+        #{conceptCode,jdbcType=VARCHAR},
+      </if>
+      <if test="conceptName != null" >
+        #{conceptName,jdbcType=VARCHAR},
+      </if>
+      <if test="conceptChangeRote != null" >
+        #{conceptChangeRote,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+</mapper>
