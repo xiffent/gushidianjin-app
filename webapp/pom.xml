@@ -21,19 +21,19 @@
 	</properties>
 	<dependencies>
 		<dependency>
-		    <groupId>net.sf.ehcache</groupId>
-		    <artifactId>ehcache-core</artifactId>
-		    <version>2.4.6</version>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache-core</artifactId>
+			<version>2.4.6</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.mybatis</groupId>
-		    <artifactId>mybatis-ehcache</artifactId>
-		    <version>1.0.0</version>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-ehcache</artifactId>
+			<version>1.0.0</version>
 		</dependency>
 		<dependency>
-		    <groupId>net.sourceforge.javacsv</groupId>
-		    <artifactId>javacsv</artifactId>
-		    <version>2.0</version>
+			<groupId>net.sourceforge.javacsv</groupId>
+			<artifactId>javacsv</artifactId>
+			<version>2.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.aspectj</groupId>
@@ -46,11 +46,11 @@
 			<version>2.6</version>
 		</dependency>
 		<dependency>
-		    <groupId>com.taobao</groupId>
-		    <artifactId>api</artifactId>
-		    <version>2.0</version>
-		    <scope>system</scope>
-		    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/taobao-sdk-java.jar
+			<groupId>com.taobao</groupId>
+			<artifactId>api</artifactId>
+			<version>2.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/taobao-sdk-java.jar
 		    </systemPath>
 		</dependency>
 		<dependency>
@@ -228,7 +228,20 @@
 			<version>2.5.2</version>
 		</dependency>
 	</dependencies>
+	
 	<build>
 		<finalName>webapp</finalName>
+		<plugins>
+			<!-- define the project compile level -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 </project>
