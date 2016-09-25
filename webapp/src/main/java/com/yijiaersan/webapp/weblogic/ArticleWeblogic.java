@@ -1,6 +1,7 @@
 package com.yijiaersan.webapp.weblogic;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -72,6 +73,7 @@ public class ArticleWeblogic {
 				articleSharesRelation.setArticleId(articleId);
 				articleSharesRelation.setCreatDate(DateUtil.getNowDate());
 				articleSharesRelation.setId(Sequence.nextId());
+				articleSharesRelation.setCreatDate(new Date());
 				articleSharesRelationsNew.add(articleSharesRelation);
 			}
 

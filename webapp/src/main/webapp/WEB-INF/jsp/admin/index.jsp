@@ -449,7 +449,7 @@
         					alert("添加成功！");
         					//alert(data.retContent);
         					var token = data.retContent;
-        					window.location.href="<%=basePath %>admin/toListArticlePage?token="+token;
+        					window.location.href="<%=basePath %>admin/toListArticlePage?token= " + token;
         				 },    
         				 error : function() {    
         					  // view("异常！");    

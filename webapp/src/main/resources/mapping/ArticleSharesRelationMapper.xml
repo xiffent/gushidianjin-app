@@ -60,8 +60,8 @@
   	insert into ARTICLE_SHARES_RELATION_TABLE 
   	values
   	<foreach collection="list" index="index" item="item" separator=",">
-  		(#{id,jdbcType=BIGINT}, #{articleId,jdbcType=BIGINT}, #{sharesId,jdbcType=VARCHAR}, 
-      #{sharesName,jdbcType=VARCHAR}, #{creatDate,jdbcType=DATE})
+  		(#{item.id,jdbcType=BIGINT}, #{item.articleId,jdbcType=BIGINT}, #{item.sharesId,jdbcType=VARCHAR}, 
+      #{item.sharesName,jdbcType=VARCHAR}, #{item.creatDate,jdbcType=DATE})
   	</foreach>
   </insert>
 </mapper>
