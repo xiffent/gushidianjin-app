@@ -40,18 +40,15 @@ public class UserContorller {
 
 	@RequestMapping(value = "/registerUser", produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public ResultEntity<UserInfo> registerUser(String telphone,
-			String password, String code) {
-		ResultEntity<UserInfo> result = userWeblogic.insertUser(telphone,
-				password, code);
+	public ResultEntity<UserInfo> registerUser(String telphone, String password, String code) {
+		ResultEntity<UserInfo> result = userWeblogic.insertUser(telphone, password, code);
 		return result;
 	}
 
 	@RequestMapping(value = "/userLogin", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public ResultEntity<UserInfo> userLogin(String telphone, String password) {
-		ResultEntity<UserInfo> result = userWeblogic.queryUser(telphone,
-				password);
+		ResultEntity<UserInfo> result = userWeblogic.queryUser(telphone, password);
 		return result;
 	}
 
@@ -97,8 +94,7 @@ public class UserContorller {
 	 */
 	@RequestMapping(value = "/updatePassword", produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public ResultEntity<String> updatePassword(String telphone,
-			String password, String code) {
+	public ResultEntity<String> updatePassword(String telphone, String password, String code) {
 		ResultEntity<String> result = new ResultEntity<String>();
 		result = userWeblogic.updatePassword(telphone, password, code);
 		return result;
@@ -106,17 +102,15 @@ public class UserContorller {
 
 	@RequestMapping(value = "/imgFileUpload", produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public JSONObject imgFileUpload(
-			@RequestParam(value = "file", required = false) MultipartFile file,
+	public JSONObject imgFileUpload(@RequestParam(value = "file", required = false) MultipartFile file,
 			HttpServletRequest request, String token) {
 		JSONObject jSONObject = new JSONObject();
 		String projectName = request.getContextPath();
-		String basePath = request.getScheme() + "://" + request.getServerName()
-				+ ":" + request.getServerPort() + projectName;
+		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+				+ projectName;
 
 		String pathStr = "/static/pic/";
-		String path = request.getSession().getServletContext()
-				.getRealPath(pathStr);
+		String path = request.getSession().getServletContext().getRealPath(pathStr);
 
 		if (file == null) {
 			jSONObject.put("retCode", "6");
@@ -133,8 +127,8 @@ public class UserContorller {
 			jSONObject.put("retMessage", "上传的文件为空");
 			return jSONObject;
 		}
-		String type = fileName.indexOf(".") != -1 ? fileName.substring(
-				fileName.lastIndexOf("."), fileName.length()) : null;
+		String type = fileName.indexOf(".") != -1 ? fileName.substring(fileName.lastIndexOf("."), fileName.length())
+				: null;
 		System.out.println(type);
 		if (type.equals(".jpg")) {
 			fileName = new Date().getTime() + UuidUtil.get32UUID() + ".jpg";

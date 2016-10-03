@@ -40,7 +40,7 @@ public class ShareController {
 			// TODO: handle exception
 			e.printStackTrace();
 			result.setRetCode("0");
-			//result.setRetContent("");
+			// result.setRetContent("");
 			result.setRetMessage("内部错误，查询失败");
 		}
 		return result;
@@ -77,7 +77,7 @@ public class ShareController {
 		} catch (Exception e) {
 			// TODO: handle exception
 			result.setRetCode("0");
-			//result.setRetContent("");
+			// result.setRetContent("");
 			result.setRetMessage("内部错误，查询失败");
 		}
 
