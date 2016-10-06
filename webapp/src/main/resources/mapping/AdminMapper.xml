@@ -12,6 +12,7 @@
     <result column="CREATE_DATETIME" property="createDatetime" jdbcType="TIMESTAMP" />
     <result column="STATUS" property="status" jdbcType="CHAR" />
   </resultMap>
+  
   <insert id="insert" parameterType="com.yijiaersan.webapp.model.Admin" >
     insert into admin_table (MAIN_ID, USERNAME, PASSWORD, 
       ADMINNAME, SEX, AGE, TEL, 
