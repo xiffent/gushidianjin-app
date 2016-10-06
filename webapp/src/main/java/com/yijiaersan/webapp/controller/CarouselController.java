@@ -13,17 +13,16 @@ import com.yijiaersan.webapp.model.Carousel;
 import com.yijiaersan.webapp.utils.result.ResultEntity;
 import com.yijiaersan.webapp.weblogic.CarouselWeblogic;
 
-
 @Controller
 @RequestMapping("/carousel")
 public class CarouselController {
 
 	@Resource
 	private CarouselWeblogic carouselWeblogic;
-	
-	@RequestMapping(value="/queryCarousel", produces="application/json;charset=UTF-8")
+
+	@RequestMapping(value = "/queryCarousel", produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public ResultEntity queryCarouselList(){
+	public ResultEntity queryCarouselList() {
 		ResultEntity result = new ResultEntity();
 		List<Carousel> carousels = new ArrayList<Carousel>();
 		try {
@@ -31,12 +30,12 @@ public class CarouselController {
 			result.setRetCode("1");
 			result.setRetContent(carousels);
 			result.setRetMessage("查询成功");
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 			result.setRetCode("0");
-			//result.setRetContent("");
+			// result.setRetContent("");
 			result.setRetMessage("服务器内部错误");
 		}
 		return result;

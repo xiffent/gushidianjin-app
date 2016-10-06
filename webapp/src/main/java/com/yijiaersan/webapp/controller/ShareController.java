@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.druid.support.json.JSONUtils;
 import com.alibaba.fastjson.JSONObject;
 import com.yijiaersan.webapp.model.ShareModel;
 import com.yijiaersan.webapp.utils.result.ResultEntity;
@@ -41,7 +40,7 @@ public class ShareController {
 			// TODO: handle exception
 			e.printStackTrace();
 			result.setRetCode("0");
-			//result.setRetContent("");
+			// result.setRetContent("");
 			result.setRetMessage("内部错误，查询失败");
 		}
 		return result;
@@ -78,7 +77,7 @@ public class ShareController {
 		} catch (Exception e) {
 			// TODO: handle exception
 			result.setRetCode("0");
-			//result.setRetContent("");
+			// result.setRetContent("");
 			result.setRetMessage("内部错误，查询失败");
 		}
 
