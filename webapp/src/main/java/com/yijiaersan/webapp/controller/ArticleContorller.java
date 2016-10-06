@@ -83,11 +83,9 @@ public class ArticleContorller {
 		if ((shares != null) && (shares.size() > 0)) {
 			for (int i = 0; i < shares.size(); ++i) {
 				SharesModel sharesModel = new SharesModel();
-				String sharesCode = ((ArticleSharesRelation) shares.get(i))
-						.getSharesId();
+				String sharesCode = ((ArticleSharesRelation) shares.get(i)).getSharesId();
 				JSONObject jsonObject = sw.getStockInfoByStockId(sharesCode);
-				JSONArray stockinfo = jsonObject.getJSONObject("retData")
-						.getJSONArray("stockinfo");
+				JSONArray stockinfo = jsonObject.getJSONObject("retData").getJSONArray("stockinfo");
 				JSONObject info = stockinfo.getJSONObject(0);
 
 				String currentPrice = info.getString("currentPrice");
@@ -115,20 +113,17 @@ public class ArticleContorller {
 				if ((token == null) || (token.equals(""))) {
 					mav.setViewName("article/default_no");
 				} else {
-					TokenInfo tokenInfo = this.tokenWeblogic
-							.selectTokenInfo(token);
+					TokenInfo tokenInfo = this.tokenWeblogic.selectTokenInfo(token);
 
 					if (tokenInfo == null) {
 						mav.setViewName("article/default_no");
 					} else {
 						String str = tokenInfo.getUserInfo();
-						UserInfo userInfo = (UserInfo) JSONUtil.json2Bean(str,
-								UserInfo.class);
+						UserInfo userInfo = (UserInfo) JSONUtil.json2Bean(str, UserInfo.class);
 						String userType = userInfo.getUserType();
 						if (userType.equals("2")) {
-							UserCollection userCollection = this.userCollectionWeblogic
-									.selectUserCollection(articleid,
-											userInfo.getUserId());
+							UserCollection userCollection = this.userCollectionWeblogic.selectUserCollection(articleid,
+									userInfo.getUserId());
 							if (userCollection != null)
 								mav.addObject("isUserCollection", "0");
 							else {
@@ -158,13 +153,11 @@ public class ArticleContorller {
 				mav.setViewName("article/reference_no");
 			} else {
 				String str = tokenInfo.getUserInfo();
-				UserInfo userInfo = (UserInfo) JSONUtil.json2Bean(str,
-						UserInfo.class);
+				UserInfo userInfo = (UserInfo) JSONUtil.json2Bean(str, UserInfo.class);
 				String userType = userInfo.getUserType();
 				if (userType.equals("2")) {
-					UserCollection userCollection = this.userCollectionWeblogic
-							.selectUserCollection(articleid,
-									userInfo.getUserId());
+					UserCollection userCollection = this.userCollectionWeblogic.selectUserCollection(articleid,
+							userInfo.getUserId());
 					if (userCollection != null)
 						mav.addObject("isUserCollection", "0");
 					else {
@@ -208,11 +201,10 @@ public class ArticleContorller {
 			}
 
 			String str = tokenInfo.getUserInfo();
-			UserInfo userInfo = (UserInfo) JSONUtil.json2Bean(str,
-					UserInfo.class);
+			UserInfo userInfo = (UserInfo) JSONUtil.json2Bean(str, UserInfo.class);
 
-			UserCollection userCollection = this.userCollectionWeblogic
-					.selectUserCollection(articleid, userInfo.getUserId());
+			UserCollection userCollection = this.userCollectionWeblogic.selectUserCollection(articleid,
+					userInfo.getUserId());
 			if (userCollection != null) {
 				tmp = true;
 			}
@@ -240,53 +232,43 @@ public class ArticleContorller {
 			}
 
 			String str = tokenInfo.getUserInfo();
-			UserInfo userInfo = (UserInfo) JSONUtil.json2Bean(str,
-					UserInfo.class);
+			UserInfo userInfo = (UserInfo) JSONUtil.json2Bean(str, UserInfo.class);
 			List articleLists = (List) result.getRetContent();
 			List articles = new ArrayList();
 
 			for (int i = 0; i < articleLists.size(); ++i) {
 				ArticleList articleList = (ArticleList) articleLists.get(i);
 				UserCollection userCollection = this.userCollectionWeblogic
-						.selectUserCollection(articleList.getArticleId(),
-								userInfo.getUserId());
+						.selectUserCollection(articleList.getArticleId(), userInfo.getUserId());
 				if (userCollection != null)
 					articleList.setIsCollection("1");
 				else {
 					articleList.setIsCollection("0");
 				}
 
-				if ((articleList.getIsVipArticle() != null)
-						&& (!articleList.getIsVipArticle().equals(""))
+				if ((articleList.getIsVipArticle() != null) && (!articleList.getIsVipArticle().equals(""))
 						&& (articleList.getIsVipArticle().equals("1"))) {
 					List articleSharesRelationsList = new ArrayList();
 
-					List ArticleSharesRelationss = articleList
-							.getArticleSharesRelations();
+					List ArticleSharesRelationss = articleList.getArticleSharesRelations();
 					for (int j = 0; j < ArticleSharesRelationss.size(); ++j) {
 						ArticleSharesRelations articleSharesRelations = (ArticleSharesRelations) ArticleSharesRelationss
 								.get(j);
-						if ((articleSharesRelations != null)
-								&& (articleSharesRelations.getSharesName() != null)
-								&& (!articleSharesRelations.getSharesName()
-										.equals(""))) {
-							int length = articleSharesRelations.getSharesName()
-									.length() - 1;
+						if ((articleSharesRelations != null) && (articleSharesRelations.getSharesName() != null)
+								&& (!articleSharesRelations.getSharesName().equals(""))) {
+							int length = articleSharesRelations.getSharesName().length() - 1;
 							String s = "";
 							for (int m = 0; m < length; ++m) {
 								s = s + "*";
 							}
 							articleSharesRelations
-									.setSharesName(articleSharesRelations
-											.getSharesName().substring(0, 1)
-											+ s);
+									.setSharesName(articleSharesRelations.getSharesName().substring(0, 1) + s);
 						}
 
 						articleSharesRelationsList.add(articleSharesRelations);
 					}
 
-					articleList
-							.setArticleSharesRelations(articleSharesRelationsList);
+					articleList.setArticleSharesRelations(articleSharesRelationsList);
 				}
 
 				articles.add(articleList);
@@ -318,8 +300,7 @@ public class ArticleContorller {
 
 		String str = tokenInfo.getUserInfo();
 		UserInfo userInfo = (UserInfo) JSONUtil.json2Bean(str, UserInfo.class);
-		result = this.articleWeblogic.insertArticleInfo(userInfo.getUserId(),
-				jsondata);
+		result = this.articleWeblogic.insertArticleInfo(userInfo.getUserId(), jsondata);
 		result.setRetCode("0");
 		result.setRetContent(token);
 		result.setRetMessage("ok");
@@ -327,8 +308,7 @@ public class ArticleContorller {
 		return result;
 	}
 
-	public List<QueryArticleRespModel> adminQueryArticleList(
-			QueryArticleReqParams queryArticleReqParams) {
+	public List<QueryArticleRespModel> adminQueryArticleList(QueryArticleReqParams queryArticleReqParams) {
 		return null;
 	}
 }
