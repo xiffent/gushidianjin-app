@@ -70,7 +70,7 @@
                             <a href="<%=basePath %>admin/toListArticlePage?token=${token }"><i class="icon-chevron-right"></i> 所有文章</a>
                         </li>
                         <li>
-                            <a href="#"><i class="icon-chevron-right"></i> 分类管理</a>
+                            <a href="#"><i class="icon-chevron-right"></i> 分类管理123</a>
                         </li>
                         <li>
                             <a href="#"><i class="icon-chevron-right"></i> 股票池</a>
